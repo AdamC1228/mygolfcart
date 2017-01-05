@@ -1,7 +1,9 @@
 #include <Servo.h>
 
+#define BAUD 115200
+
 //main power relay pin
-byte mainPower = 32; 
+byte mainPower = 30; 
  
 String incoming = "";
 boolean completeString = false;
@@ -86,11 +88,10 @@ void logger(String t)
 /*
  * on - turns on the main power relay
  * off - turns off the main power relay
- * 
-BVL - begin vehicle left
-BVR - begin vehicle right
-EVL - end vehicle left
-EVR - end vehicle right
+ * bvl - begin vehicle left
+ * bvr - begin vehicle right
+ * evl - end vehicle left
+ * evr - end vehicle right
 */
 
 void doSomething(String s)
@@ -178,7 +179,7 @@ void setup()
      pinMode(mainPower, OUTPUT);
      digitalWrite(mainPower, LOW);
 
-     Serial.begin(115200);
+     Serial.begin(BAUD);
      
      //attach interrupts for the steering encoder motor
      attachInterrupt(STEER_INTERRUPT_1, steer_inter_1, CHANGE); 

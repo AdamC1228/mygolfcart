@@ -4,34 +4,33 @@
 #include <math.h>
 #include <stdlib.h>
 
+#define BAUD 115200
 
 //main power pin
-byte mainPower = 32; 
+#define MAIN_POWER 30
 
-byte throttlePin = 10;
+//throttle pin,  for the servo
+#define THROTTLE 8
+
 Servo throttle;
- 
 String incoming = "";
 boolean completeString = false;
-
 
 void setup()
 {
      //make sure the main power is shut off
-     pinMode(mainPower, OUTPUT);
-     digitalWrite(mainPower, LOW);
+     pinMode(MAIN_POWER, OUTPUT);
+     digitalWrite(MAIN_POWER, LOW);
      
      //attach the servo to the pin
-     throttle.attach(throttlePin);
+     throttle.attach(THROTTLE);
 
      //move the servo back to 0 degrees before you turn on the main power!!!
-     throttle.write(0);
+     throttle.write(180);
      
-     Serial.begin(115200);
+     Serial.begin(BAUD);
 
-     
      Serial.println("arduino ready");
-     
 }
 
 void loop()
@@ -76,6 +75,10 @@ void logger(String t)
  * ping - keepalive 
  * on - turn on the main power
  * off - turn off the main power
+ * f - makes the cart start moving  
+ * s - makes the cart stop moving
+ * <type a number> - makes hte servo move to the given angle, adjusts
+ * the speed of the cart
  */
 
 void doSomething(String s)
@@ -84,11 +87,11 @@ void doSomething(String s)
      //logger(s);
      if (incoming == "on")
      {
-          digitalWrite(mainPower, HIGH);
+          digitalWrite(MAIN_POWER, HIGH);
      }
      else if (incoming == "off")
      {
-          digitalWrite(mainPower, LOW);
+          digitalWrite(MAIN_POWER, LOW);
      }
      else if (s=="ping" || s == "PING")
      {
@@ -96,13 +99,13 @@ void doSomething(String s)
           //Serial.println("pong");
           //Serial.println(millis());
      }
-     else if (s =="f")
+     else if (s =="s")
      {
           //throttle.write();  //put the position here, this is the angle to move to
           throttle.write(180);
-          logger("to 100");
+          logger("to 180");
      }
-     else if (s == "s")
+     else if (s == "f")
      {
           throttle.write(20);
           logger("to 20");

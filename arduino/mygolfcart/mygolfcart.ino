@@ -6,14 +6,14 @@
 #include "Timer.h"
 
 //main power pin
-byte mainPower = 32; 
+byte mainPower = 30; 
  
 String incoming = "";
 boolean completeString = false;
 
-#define BRAKE_ON_PIN  38   //pin 2
-#define BRAKE_OFF_PIN 40  //pin 3
-#define BRAKE_PIN   39
+#define BRAKE_ON_PIN  32   //pin 2
+#define BRAKE_OFF_PIN 35  //pin 3
+#define BRAKE_PIN   33
 
 #define BRAKE_APPLY  1000
 #define BRAKE_RELEASE 2000
@@ -70,7 +70,7 @@ Servo steer;
 //1 - seering wheel will go back to center
 int auto_center = 1;
 
-byte throttlePin = 10;
+byte throttlePin = 8;
 Servo throttle;
 
 /*
@@ -406,6 +406,8 @@ void tickhandler()
 
 void setup()
 {
+     Serial.begin(115200);
+     
      //make sure the main power is shut off
      pinMode(mainPower, OUTPUT);
      digitalWrite(mainPower, LOW);
@@ -413,11 +415,11 @@ void setup()
      //attach the servo to the pin
      throttle.attach(throttlePin);
 
-     //move the servo back to 0 degrees before you turn on the main power!!!
-     throttle.write(0);
+     //move the servo back to 180 degrees before you turn on the main power!!!
+     throttle.write(180);
    
      
-     Serial.begin(115200);
+     
 
      
      pinMode(BRAKE_ON_PIN, INPUT_PULLUP);
@@ -438,7 +440,7 @@ void setup()
      steer.writeMicroseconds(STEER_STOP);
 
      //kick on the main power
-     digitalWrite(mainPower, HIGH);
+     //digitalWrite(mainPower, HIGH);
      
      Wire.begin();
      Serial.println("after wire.begin");
@@ -635,11 +637,11 @@ void doSomething(String s)
                going_left = 1;
           }
      }
-     else if (s == "BVF" || s == "bvf")
+     else if (s == "EVF" || s == "evf")
      {
           throttle.write(180);
      }
-     else if(s == "EVF" || s == "evf")
+     else if(s == "BVF" || s == "bvf")
      {
           throttle.write(0);
      }
