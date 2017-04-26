@@ -5,7 +5,7 @@ WVUIT golfCart Project
 This is the primary control software for the WVUIT golfCart Project. 
 
 ----------
-###Change Log
+Change Log
 - Restructured the repository
 - Separated new code from working code
 - Dev 
@@ -14,23 +14,40 @@ This is the primary control software for the WVUIT golfCart Project.
 ----------
 
 Requirements 
-:	Perl
-		>perl-Future
-		>perl-IO-Termios
-		>perl-IO-Async
-		>perl-Moose
-		>perl-Text-CSV
-		>perl-Data-Dumper
-:	Arduino
-		>Arduino v1.6.7
-:	QT
-		>QSerialPort
+*	Perl
+		perl-Future
+		perl-IO-Termios
+		perl-IO-Async
+		perl-Moose
+		perl-Text-CSV
+ 		perl-Data-Dumper
+*	Arduino
+		Arduino v1.6.7
+*	QT
+		QSerialPort
 
 
 Documentation
 ----  
 
-###Dev 
+Current 
+| Category	| Component	| Description						|
+| --------------| --------------| ----------------------------------------------------- |
+|golfCart	|		| 							|
+|		| golfCart	| main program for the golfCart 			|
+|java		|		|							|
+|		| server	| Main java application for the server			|
+|		| sharedData 	| Common data object					|
+|		| networkWrite 	| Sends data via network socket to connected client	|
+|		| networkRead 	| Reads Data via network socket from connected client	|
+|		| arduinoWrite 	| Sends data via serial port to arduino			|
+|		| arduinoRead 	| Reads data via serial port from arduino		|
+|		| debugLogger 	| Loggs all server program activity			|
+|		| jssc-2.8.0 	| JSSC serial port library for serial communication. 	|
+|qt 		|		|							|
+|		|remotecontrol 	| GUI client for remote-controlling golfCart		| 
+
+Dev 
 | Category	| Component	| Description						|
 | --------------| --------------| ----------------------------------------------------- |
 |golfCart	|		| 							|
@@ -48,7 +65,7 @@ Documentation
 |		| jssc-2.8.0 	| JSSC serial port library for serial communication. 	|
 
 
-###Current
+Version-1.0
 | Category	| Component	| Description						|
 | --------------| --------------| ----------------------------------------------------- |
 |arduino	|		| 							|
